@@ -5,8 +5,13 @@ export MOZ_ENABLE_WAYLAND=1
 export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 # ~/.config/tmux/plugins
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
-export OPENAI_API_KEY="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"
+source ~/.config/api.keys
 export DEFAULT_USER="volt"
+
+cmd () {
+  arg=${1}
+  print -z -- $(rg ^$1 ~/obsidian/ |  sed 's/^[^:]*://' | fzf )
+}
 
 alias icat="kitten icat"
 alias msfc="msfdb start && msfconsole -q"
@@ -16,13 +21,22 @@ alias kali="sudo docker start 303 -i"
 alias vi="nvim"
 alias py="python3"
 alias fbat="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-alias f='vim "$(fbat)"'
+alias f='nvim "$(fbat)"'
 alias szsh="source /home/volt/.zshrc"
 alias pycharm="~/pycharm-community-2023.2.2/bin/pycharm.sh"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
+
+# Kitty integration
+if [[ -n "$KITTY_INSTALLATION_DIR" ]]; then
+  export KITTY_SHELL_INTEGRATION="enabled"
+  autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+  kitty-integration
+  unfunction kitty-integration
+fi
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -45,7 +59,7 @@ ZSH_THEME="agnoster"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+ zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -67,7 +81,7 @@ ZSH_THEME="agnoster"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -138,3 +152,5 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 source /home/volt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+alias l="eza -lh"
+alias la="eza -lah"

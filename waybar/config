@@ -19,8 +19,8 @@
     "height": 30,
 
     "modules-left": [
+        "custom/arch",
         "hyprland/workspaces",
-        "hyprland/mode"
     ],
     "modules-center": [
         // "hyprland/window",
@@ -33,9 +33,10 @@
         "cpu",
         "temperature",
         "battery",
-        "tray",
+        "bluetooth",
         "clock#date",
-        "clock#time"
+        "clock#time",
+        "custom/updates",
     ],
 
 
@@ -47,6 +48,11 @@
         "restart-interval": 9,
         "exec": "~/.config/checkvpn.sh",
         "format": "{}",
+    },
+
+    "custom/arch": {
+        "format": "  ",
+        "tooltip": false,
     },
 
     "battery": {
@@ -90,6 +96,14 @@
         }
     },
 
+    "bluetooth": {
+        "format": "  {status} ",
+        "format-disabled": "", // an empty format will hide the module
+        "format-connected": "  {num_connections} ",
+        "tooltip-format": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}   {device_address}"
+    },
+
     "memory": {
         "interval": 5,
         "format": "  {}%", // Icon: memory
@@ -107,46 +121,26 @@
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
-    "hyprland/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
-    },
-
-    "hyprland/window": {
-        "format": "{}",
-        "max-length": 120
-    },
-
     "hyprland/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true,
-        "format": "{icon} ",
-        "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
+      "format": "{name}",
+      "format": "{icon}",
+      "tooltip": false,
+      "all-outputs": true,
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
     },
 
     "pulseaudio": {
        //"scroll-step": 1,
-       "format": "{icon}  {volume}%",
-       "format-bluetooth": "{icon}  {volume}%",
-       "format-muted": "",
-       "format-icons": {
-           "headphones": "",
-           "handsfree": "",
-           "headset": "",
-           "phone": "",
-           "portable": "",
-           "car": "",
-           "default": ["", ""]
-       },
+       "format": "{icon} {volume}%",
+      "format-muted": "",
+      "tooltip": false,
+      "format-icons": {
+        "headphone": "",
+        "default": ["", "", "󰕾", "󰕾", "󰕾", "", "", ""]
+      },
        "on-click": "pavucontrol"
     },
 
@@ -164,9 +158,15 @@
       "tooltip": true
     },
 
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
+    "custom/updates": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "format-icons": {
+            "has-updates": "󱍷 ",
+            "updated": "󰂪 "
+        },
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates"
     }
 
 }

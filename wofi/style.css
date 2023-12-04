@@ -2,11 +2,11 @@
 @define-color accent #cad3f5;
 @define-color txt #cad3f5;
 @define-color bg #0D1117;
-@define-color bg2 #494d64;
+@define-color bg2 #0D1117;
 
  * {
-    font-family: 'JetBrains Mono NL', monospace;
-    font-size: 15px;
+    font-family: 'JetBrainsMono Nerd Font', monospace;
+    font-size: 18px;
  }
 
  /* Window */
