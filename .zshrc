@@ -7,12 +7,17 @@ export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 export PATH=$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 source ~/.config/api.keys
 export DEFAULT_USER="volt"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export PAGER=bat
+export EDITOR=nvim
+
 
 cmd () {
   arg=${1}
   print -z -- $(rg ^$1 ~/obsidian/ |  sed 's/^[^:]*://' | fzf )
 }
 
+alias open="xdg-open"
 alias icat="kitten icat"
 alias msfc="msfdb start && msfconsole -q"
 alias gpt="chatgpt"
@@ -104,7 +109,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zoxide zsh-syntax-highlighting colored-man-pages fast-syntax-highlighting zsh-autosuggestions zsh-autocomplete)
+plugins=(vi-mode git zoxide zsh-syntax-highlighting colored-man-pages fast-syntax-highlighting zsh-autosuggestions zsh-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
 
