@@ -43,18 +43,28 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
-  -- Install a plugin
+  -- install a plugin
   {
     "max397574/better-escape.nvim",
-    event = "InsertEnter",
+    event = "insertenter",
     config = function()
       require("better_escape").setup()
     end,
   },
-
-  -- To make a plugin not be loaded
+  -- lazy.nvim
+  {
+   "ThePrimeagen/vim-be-good",
+    lazy = false,
+  },
+  {
+     "m4xshen/hardtime.nvim",
+     dependencies = { "muniftanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+     opts = {},
+      lazy = false,
+  },
+  -- to make a plugin not be loaded
   -- {
-  --   "NvChad/nvim-colorizer.lua",
+  --   "nvchad/nvim-colorizer.lua",
   --   enabled = false
   -- },
 
