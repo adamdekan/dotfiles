@@ -1,0 +1,16 @@
+keymap:
+  - name: Global
+    remap:
+      Super-c: Ctrl-c
+      Super-v: Ctrl-v
+      Ctrl-j: down
+      Ctrl-k: up
+      Ctrl-h: left
+      Ctrl-l: right
+
+  - name: Terminal
+    application:
+      only: kitty
+    remap:
+      Super-c: C-S-c
+

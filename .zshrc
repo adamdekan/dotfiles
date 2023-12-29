@@ -17,6 +17,7 @@ cmd () {
   print -z -- $(rg ^$1 ~/obsidian/ |  sed 's/^[^:]*://' | fzf )
 }
 
+alias cat="bat"
 alias open="xdg-open"
 alias icat="kitten icat"
 alias msfc="msfdb start && msfconsole -q"
