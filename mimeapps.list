@@ -27,6 +27,7 @@ application/x-xz-compressed-tar=xarchiver.desktop
 application/x-cpio=xarchiver.desktop
 application/x-cpio-compressed=xarchiver.desktop
 application/x-lzop=xarchiver.desktop
+application/pdf=org.pwmt.zathura.desktop
 image/png=ristretto.desktop
 image/gif=ristretto.desktop
 image/jpeg=ristretto.desktop

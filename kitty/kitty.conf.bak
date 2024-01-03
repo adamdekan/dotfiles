@@ -1933,11 +1933,11 @@ map alt+shift+k scroll_to_prompt -1
 
 #: Next window
 
-# map alt+l next_window
+ map alt+l next_window
 
 #: Previous window
 
-# map alt+h previous_window
+ map alt+h previous_window
 
 #: Move window forward
 
@@ -2407,6 +2407,6 @@ map ctrl+shift+cmd+r load_config_file
 
 
 # BEGIN_KITTY_THEME
-# Seti
+# Atom
 include current-theme.conf
 # END_KITTY_THEME
